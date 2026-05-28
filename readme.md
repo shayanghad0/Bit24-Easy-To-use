@@ -209,6 +209,110 @@ python 2buy.py  # then enter your API credentials
 
 <div dir="rtl">
 
+<div dir="rtl">
+
+## 🚀 دعوتنامه ویژه
+
+---
+
+### بیا با هم یک ربات معاملاتی حرفه‌ای برای Bit24 بسازیم!
+
+از صفر تا صد، قدم به قدم، با همفکری و همکاری جمعی.
+
+---
+
+## 📋 چه کار خواهیم کرد؟
+
+| مرحله | توضیح |
+|-------|-------|
+| 💡 **ایده‌پردازی** | ارائه ایده‌های جدید برای ربات |
+| 🐛 **حل مشکلات** | رفع باگ‌ها و خطاهای موجود |
+| 👨‍💻 **برنامه‌نویسی** | فورک (Fork) و درخواست Pull Request |
+| 🔍 **دیباگ جمعی** | باگ‌یابی و رفع خطا به صورت گروهی |
+| 📚 **مستندسازی** | نوشتن مستندات کامل و روان |
+
+---
+
+## 🎯 قوانین مشارکت
+
+برای مشاهده قوانین و نحوهjoin شدن، فایل زیر را مطالعه کنید:
+
+### [📜 قوانین و نحوه مشارکت](bot/rule.md)
+
+---
+
+## 🔧 پیش‌نیازها
+
+- یک حساب گیت‌هاب (GitHub) داشته باشید
+- آشنایی مقدماتی با Python
+- علاقه به یادگیری و کار تیمی
+
+---
+
+## 🤝 چطور join شوم؟
+
+1. **فورک (Fork)** کنید این ریپازیتوری را
+2. **قوانین** را در [`bot/rule.md`](bot/rule.md) بخوانید
+3. یک **Issue** جدید باز کنید و ایده یا مشکل خود را مطرح کنید
+4. منتظر بمانید تا بقیه اعضا با شما هماهنگ شوند
+
+---
+
+## 💬 ارتباط با تیم
+
+- از بخش **Issues** گیت‌هاب برای بحث استفاده کنید
+- هر Pull Request حتماً توضیحات کامل داشته باشد
+- سوالات خود را در بخش **Discussions** مطرح کنید
+
+---
+
+## ⭐ بیایید با هم یاد بگیریم!
+
+**هیچ کد آماده‌ای نیست - همه چیز را با هم می‌سازیم!**
+
+</div>
+
+---
+
+## English Version
+
+### 🚀 Special Invitation
+
+**Let's build a professional trading bot for Bit24 together!**
+
+From zero to hero, step by step, with teamwork and collaboration.
+
+---
+
+### 📋 What we'll do:
+
+- 💡 Brainstorming ideas
+- 🐛 Solving problems & issues
+- 👨‍💻 Programming (Fork & Pull Request)
+- 🔍 Debugging together
+- 📚 Documentation
+
+---
+
+### 🎯 Rules to join:
+
+### [📜 Read the rules here](bot/rule.md)
+
+---
+
+### 🤝 How to join?
+
+1. **Fork** this repository
+2. Read the **rules** in [`bot/rule.md`](bot/rule.md)
+3. Open an **Issue** with your idea or problem
+4. Wait for team coordination
+
+---
+
+**⭐ No ready code - we build everything together!**
+
+
+
 ##  ⚠️ نکته مهم
 
 **این کدها صرفاً برای راهنمایی و آموزش نوشته شده‌اند.**
