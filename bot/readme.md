@@ -1,5 +1,7 @@
 <div dir="rtl">
 
+For More information read [Rule.md](https://github.com/shayanghad0/Bit24-Easy-To-use/blob/master/bot/rule.md)
+
 # 📜 قوانین مشارکت در پروژه Bit24 Trading Bots
 
 ---
