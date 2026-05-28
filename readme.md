@@ -247,3 +247,6 @@ SECRET_KEY = input("Please Enter You Secret Key : ") # ✅ Never stored
 
 **🧑‍💻 ما فقط برنامه نویسیم | We Only Developer**
 </div>
+
+
+> MIT License ;P
