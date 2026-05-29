@@ -40,8 +40,8 @@ bot/codes/{نام-پروژه-شما}/
 
 **مثال:**
 ```
-bot/codes/martingale-bot/main.py
-bot/codes/grid-trading-bot/bot.py
+bot/codes/martingale-bot/Your-code.{??}
+...
 bot/codes/simple-dca/README.md
 ```
 
@@ -83,21 +83,12 @@ Bit24-Easy-To-use/
 ├── README.md
 ├── bot/
 │   ├── codes/
-│   │   ├── martingale-bot/
-│   │   │   ├── main.py
-│   │   │   ├── README.md
-│   │   │   └── config.py
-│   │   ├── grid-trading-bot/
-│   │   │   ├── main.py
-│   │   │   └── README.md
-│   │   └── your-bot-name/
-│   │       ├── main.py
-│   │       ├── README.md
-│   │       └── requirements.txt
-│   └── utils/
-│       └── bit24_api.py
-└── docs/
-    └── API.md
+       └── your-bot-name/
+           ├── files
+           ├── ...
+           ├── README.md
+           └── requirements.txt
+
 ```
 
 ---
@@ -112,6 +103,17 @@ Bit24-Easy-To-use/
 | 📦 وابستگی‌ها | فایل `requirements.txt` برای کتابخانه‌های مورد نیاز |
 | 💬 کامنت | کدها به زبان انگلیسی یا فارسی کامنت‌گذاری شوند |
 | 🐍 PEP8 | رعایت استانداردهای PEP8 پایتون |
+
+---
+
+### زبان‌های مورد قبول
+
+| زبان |
+|------|
+| Python |
+| Go |
+| Node.js |
+###     
 
 ---
 

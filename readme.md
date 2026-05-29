@@ -2,13 +2,19 @@
 
 <div dir="rtl">
 
-# ربات معامله‌گر Bit24 با Python و Go
+# ربات معامله‌گر Bit24 با Python، Go و Node.js
 
 ### معرفی پروژه
 
 این پروژه مجموعه‌ای از ابزارهای ساده و کاربردی برای انجام معاملات خودکار در صرافی **Bit24** می‌باشد.
 
-نسخه‌های پروژه هم با **Python** و هم با **Go (Golang)** ارائه شده‌اند تا بتوانید بر اساس نیاز خود از هر زبان استفاده کنید.
+نسخه‌های پروژه با:
+
+* **Python**
+* **Go (Golang)**
+* **Node.js**
+
+ارائه شده‌اند تا بتوانید بر اساس نیاز خود از هر زبان استفاده کنید.
 
 با استفاده از این کدها می‌توانید:
 
@@ -17,6 +23,7 @@
 * تمام موجودی یک ارز را بفروشید
 * خرید با مبلغ تومانی انجام دهید
 * ساختار API صرافی Bit24 را یاد بگیرید
+* SDK یا Trading Bot حرفه‌ای توسعه دهید
 
 ---
 
@@ -31,6 +38,7 @@
 | 📦 فروش تمام موجودی | فروش کل موجودی یک ارز         |
 | ⚡ نسخه Go           | اجرای سریع‌تر و حرفه‌ای‌تر    |
 | 🐍 نسخه Python      | ساده و مناسب یادگیری          |
+| 🟩 نسخه Node.js     | مناسب SDK و Bot های مدرن      |
 
 ---
 
@@ -51,6 +59,13 @@ Bit24-Trading-Bot/
 │   ├── 2sell.go
 │   ├── asell.go
 │   ├── irtbuy.go
+│   └── API.md
+│
+├── nodejs/
+│   ├── 2buy.js
+│   ├── 2sell.js
+│   ├── asell.js
+│   ├── irtbuy.js
 │   └── API.md
 │
 ├── bot/
@@ -86,142 +101,166 @@ Bit24-Trading-Bot/
 
 ---
 
-# چرا Go؟
+# فایل‌های Node.js
 
-نسخه Go برای افرادی مناسب است که می‌خواهند:
-
-* سرعت بالاتر داشته باشند
-* مصرف RAM کمتر باشد
-* فایل EXE مستقل بسازند
-* ربات حرفه‌ای‌تر توسعه دهند
-* Multi-thread / Goroutine استفاده کنند
-* Trading Bot واقعی توسعه دهند
-
----
-
-# پیش‌نیازهای Python
-
-نصب کتابخانه requests:
-
-```bash
-pip install requests
-```
-
-اجرای فایل‌ها:
-
-```bash
-python 2buy.py
-```
+| فایل            | کاربرد                      |
+| --------------- | --------------------------- |
+| `2buy.js`       | خرید لیمیت با Node.js       |
+| `2sell.js`      | فروش مارکت با Node.js       |
+| `asell.js`      | فروش کل موجودی با Node.js   |
+| `irtbuy.js`     | خرید با مبلغ تومانی         |
+| `API_NODEJS.md` | مستندات کامل API در Node.js |
 
 ---
 
-# پیش‌نیازهای Go
+# چرا Node.js؟
 
-## نصب Go
+نسخه Node.js برای افرادی مناسب است که می‌خواهند:
+
+* SDK حرفه‌ای بسازند
+* CLI Tool توسعه دهند
+* Trading Bot Real-time بسازند
+* WebSocket استفاده کنند
+* Express API یا Backend ایجاد کنند
+* با TypeScript توسعه دهند
+* Bot های مدرن و سریع بسازند
+
+---
+
+# پیش‌نیازهای Node.js
+
+## نصب Node.js
 
 دانلود از سایت رسمی:
 
 ```text
-https://go.dev/dl/
+https://nodejs.org/
 ```
 
 بررسی نصب:
 
 ```bash
-go version
+node -v
 ```
 
 ---
 
-# اجرای فایل‌های Go
-
-## اجرای مستقیم
+# اجرای فایل‌های Node.js
 
 ```bash
-go run 2buy.go
+node 2buy.js
 ```
 
 ---
 
-## ساخت فایل EXE
+# نصب پکیج‌ها
+
+در این پروژه از `fetch` داخلی Node.js نسخه 18+ استفاده شده است.
+
+در صورت استفاده از نسخه‌های قدیمی:
 
 ```bash
-go build
-```
-
-یا:
-
-```bash
-go build 2buy.go
-```
-
-خروجی:
-
-```text
-2buy.exe
-```
-
-اجرا:
-
-```bash
-./2buy.exe
-```
-
-در PowerShell:
-
-```powershell
-.\2buy.exe
+npm install node-fetch
 ```
 
 ---
 
-# ساخت Go Module
-
-پیشنهاد می‌شود:
+# ساخت package.json
 
 ```bash
-go mod init bit24-bot
+npm init -y
 ```
 
-سپس:
+---
+
+# نصب TypeScript (اختیاری)
 
 ```bash
-go mod tidy
+npm install -D typescript ts-node @types/node
 ```
 
 ---
 
-# نحوه دریافت API Key
+# اجرای TypeScript
 
-1. وارد حساب کاربری خود در Bit24 شوید
-2. وارد بخش مدیریت API شوید
-3. یک API جدید بسازید
-4. دسترسی‌های مورد نیاز را فعال کنید
-5. API Key و Secret Key را کپی کنید
-
----
-
-# نمونه دریافت اطلاعات کاربر
-
-## Python
-
-```python
-API_KEY = input("Please Enter Your API Key : ")
-SECRET_KEY = input("Please Enter Your Secret Key : ")
+```bash
+npx ts-node bot.ts
 ```
 
 ---
 
-## Go
+# ساختار params در Node.js
 
-```go
-reader := bufio.NewReader(os.Stdin)
+```js
+const params = {
+    base_coin_symbol: "ADA",
+    quote_coin_symbol: "IRT",
+    type: "1",
+    category_type: "1",
+    quote_coin_amount: "200000"
+};
+```
 
-fmt.Print("Please Enter Your API Key: ")
-apiKey, _ := reader.ReadString('\n')
+---
 
-fmt.Print("Please Enter Your Secret Key: ")
-secretKey, _ := reader.ReadString('\n')
+# نمونه دریافت API Key در Node.js
+
+```js
+const readline = require("readline");
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question("Please Enter Your API Key: ", (apiKey) => {
+
+    rl.question("Please Enter Your Secret Key: ", (secretKey) => {
+
+        console.log(apiKey);
+        console.log(secretKey);
+
+        rl.close();
+    });
+});
+```
+
+---
+
+# ساخت Signature در Node.js
+
+```js
+const crypto = require("crypto");
+
+function createSignature(params, secretKey) {
+
+    const sortedKeys = Object.keys(params).sort();
+
+    const queryString = sortedKeys
+        .map((key) => `${key}=${params[key]}`)
+        .join("&");
+
+    return crypto
+        .createHmac("sha256", secretKey)
+        .update(queryString)
+        .digest("hex");
+}
+```
+
+---
+
+# ارسال درخواست در Node.js
+
+```js
+const response = await fetch(url, {
+    method: "POST",
+    headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-BIT24-APIKEY": apiKey
+    },
+    body: new URLSearchParams(params)
+});
 ```
 
 ---
@@ -242,10 +281,11 @@ python 2buy.py
 go run 2buy.go
 ```
 
-این فایل:
+## Node.js
 
-* بهترین قیمت فروش را دریافت می‌کند
-* سفارش Limit Buy ثبت می‌کند
+```bash
+node 2buy.js
+```
 
 ---
 
@@ -261,6 +301,12 @@ python 2sell.py
 
 ```bash
 go run 2sell.go
+```
+
+## Node.js
+
+```bash
+node 2sell.js
 ```
 
 ---
@@ -279,10 +325,11 @@ python asell.py
 go run sell_all_balance.go
 ```
 
-این فایل:
+## Node.js
 
-* موجودی ارز را دریافت می‌کند
-* کل موجودی را می‌فروشد
+```bash
+node asell.js
+```
 
 ---
 
@@ -298,6 +345,12 @@ python irtbuy.py
 
 ```bash
 go run irtbuy.go
+```
+
+## Node.js
+
+```bash
+node irtbuy.js
 ```
 
 ---
@@ -328,39 +381,15 @@ params := map[string]string{
 
 ---
 
-# ارزهای پشتیبانی‌شده
+## Node.js
 
-```text
-BTC
-ETH
-ADA
-SOL
-DOGE
-XRP
-BNB
-TRX
-AVAX
-DOT
-LTC
+```js
+const params = {
+    base_coin_symbol: "ADA",
+    quote_coin_symbol: "IRT",
+    amount: "2"
+};
 ```
-
-و سایر ارزهای پشتیبانی‌شده در Bit24.
-
----
-
-# تفاوت سفارشات
-
-| نوع سفارش | category_type |
-| --------- | ------------- |
-| Market    | `"1"`         |
-| Limit     | `"0"`         |
-
----
-
-| نوع معامله | type  |
-| ---------- | ----- |
-| Buy        | `"1"` |
-| Sell       | `"0"` |
 
 ---
 
@@ -398,6 +427,21 @@ params := map[string]string{
 
 ---
 
+## Node.js
+
+```js
+const params = {
+    base_coin_symbol: "ADA",
+    quote_coin_symbol: "IRT",
+    type: "0",
+    category_type: "0",
+    price: "100000",
+    amount: "5"
+};
+```
+
+---
+
 # خرید اتریوم با 1 میلیون تومان
 
 ## Python
@@ -428,81 +472,30 @@ params := map[string]string{
 
 ---
 
-# ساخت Signature
+## Node.js
 
-تمام درخواست‌ها باید با HMAC-SHA256 امضا شوند.
-
----
-
-## Python
-
-```python
-query = urlencode(sorted(params.items()))
-
-signature = hmac.new(
-    SECRET_KEY.encode(),
-    query.encode(),
-    hashlib.sha256
-).hexdigest()
-
-params["signature"] = signature
+```js
+const params = {
+    base_coin_symbol: "ETH",
+    quote_coin_symbol: "IRT",
+    type: "1",
+    category_type: "1",
+    quote_coin_amount: "1000000"
+};
 ```
 
 ---
 
-## Go
+# مزایای Node.js نسبت به Python
 
-```go
-func signParams(params map[string]string) string {
-	var keys []string
-
-	for k := range params {
-		if k != "signature" {
-			keys = append(keys, k)
-		}
-	}
-
-	sort.Strings(keys)
-
-	var parts []string
-
-	for _, k := range keys {
-		parts = append(parts, fmt.Sprintf("%s=%s", k, params[k]))
-	}
-
-	queryString := strings.Join(parts, "&")
-
-	h := hmac.New(sha256.New, []byte(SECRET_KEY))
-	h.Write([]byte(queryString))
-
-	return hex.EncodeToString(h.Sum(nil))
-}
-```
-
----
-
-# نکات مهم
-
-⚠️ قبل از استفاده حتماً مطالعه کنید:
-
-1. ابتدا با مبالغ کم تست کنید
-2. Secret Key را با کسی به اشتراک نگذارید
-3. موجودی حساب را بررسی کنید
-4. برای Buy Market از `quote_coin_amount` استفاده کنید
-5. برای Sell Market از `amount` استفاده کنید
-6. در Go حتماً Timeout تنظیم کنید
-
----
-
-# Timeout در Go
-
-پیشنهاد حرفه‌ای:
-
-```go
-client := &http.Client{
-	Timeout: 15 * time.Second,
-}
-```
+| قابلیت            | Python | Node.js |
+| ----------------- | ------ | ------- |
+| Real-time         | متوسط  | عالی    |
+| WebSocket         | خوب    | عالی    |
+| ساخت API          | خوب    | عالی    |
+| مناسب Trading Bot | خوب    | عالی    |
+| مناسب SDK         | متوسط  | عالی    |
+| TypeScript        | محدود  | عالی    |
 
 ---
 
@@ -518,85 +511,6 @@ client := &http.Client{
 
 ---
 
-# مشارکت در پروژه
-
-## چه کار خواهیم کرد؟
-
-| بخش            | توضیح                 |
-| -------------- | --------------------- |
-| 💡 ایده‌پردازی | توسعه قابلیت‌های جدید |
-| 🐛 رفع باگ     | Debug و Fix           |
-| 👨‍💻 توسعه    | Pull Request          |
-| 📚 مستندسازی   | بهبود Docs            |
-| ⚡ نسخه Go      | توسعه SDK حرفه‌ای     |
-
----
-
-# نحوه مشارکت
-
-1. Fork کنید
-2. Rule ها را بخوانید
-3. Issue ثبت کنید
-4. Pull Request ارسال کنید
-
----
-
-# English Summary
-
-Bit24 Trading Bot supports both Python and Go implementations for automated trading on Bit24 exchange.
-
-Supported features:
-
-* Market Buy
-* Market Sell
-* Limit Buy
-* Limit Sell
-* Sell Full Balance
-* HMAC-SHA256 Signing
-* Go & Python examples
-
----
-
-# Quick Start
-
-## Python
-
-```bash
-pip install requests
-python 2buy.py
-```
-
----
-
-## Go
-
-```bash
-go run 2buy.go
-```
-
-Build executable:
-
-```bash
-go build
-```
-
----
-
-# Security Notice
-
-* API keys are processed only on your system
-* No information is sent anywhere else
-* Never share your Secret Key
-* Use small amounts for testing
-
----
-
-# License
-
-MIT License
-
----
-
 # Final Note
 
 ⚡ این پروژه می‌تواند پایه‌ای برای ساخت:
@@ -604,6 +518,8 @@ MIT License
 * Trading Bot حرفه‌ای
 * CLI Tool
 * Go SDK
+* Node.js SDK
+* TypeScript SDK
 * Market Scanner
 * Auto Trader
 * Signal Bot
@@ -612,150 +528,136 @@ MIT License
 باشد.
 
 </div>
+# English Summary
 
+Bit24 Trading Bot supports:
 
-<div dir="rtl">
+* Python
+* Go (Golang)
+* Node.js
 
-## 🚀 دعوتنامه ویژه
-
----
-
-### بیا با هم یک ربات معاملاتی حرفه‌ای برای Bit24 بسازیم!
-
-از صفر تا صد، قدم به قدم، با همفکری و همکاری جمعی.
+implementations for automated trading on Bit24 exchange.
 
 ---
 
-## 📋 چه کار خواهیم کرد؟
+# Features
 
-| مرحله | توضیح |
-|-------|-------|
-| 💡 **ایده‌پردازی** | ارائه ایده‌های جدید برای ربات |
-| 🐛 **حل مشکلات** | رفع باگ‌ها و خطاهای موجود |
-| 👨‍💻 **برنامه‌نویسی** | فورک (Fork) و درخواست Pull Request |
-| 🔍 **دیباگ جمعی** | باگ‌یابی و رفع خطا به صورت گروهی |
-| 📚 **مستندسازی** | نوشتن مستندات کامل و روان |
-
----
-
-## 🎯 قوانین مشارکت
-
-برای مشاهده قوانین و نحوهjoin شدن، فایل زیر را مطالعه کنید:
-
-### [📜 قوانین و نحوه مشارکت](bot/rule.md)
+* ✅ Market Buy
+* ✅ Market Sell
+* ✅ Limit Buy
+* ✅ Limit Sell
+* ✅ Sell Full Balance
+* ✅ HMAC-SHA256 Signing
+* ✅ Python Examples
+* ✅ Go Examples
+* ✅ Node.js Examples
 
 ---
 
-## 🔧 پیش‌نیازها
+# Project Structure
 
-- یک حساب گیت‌هاب (GitHub) داشته باشید
-- آشنایی مقدماتی با Python
-- علاقه به یادگیری و کار تیمی
+```text id="enstruct"
+Bit24-Trading-Bot/
 
----
-
-## 🤝 چطور join شوم؟
-
-1. **فورک (Fork)** کنید این ریپازیتوری را
-2. **قوانین** را در [`bot/rule.md`](bot/rule.md) بخوانید
-3. یک **Issue** جدید باز کنید و ایده یا مشکل خود را مطرح کنید
-4. منتظر بمانید تا بقیه اعضا با شما هماهنگ شوند
-
----
-
-## 💬 ارتباط با تیم
-
-- از بخش **Issues** گیت‌هاب برای بحث استفاده کنید
-- هر Pull Request حتماً توضیحات کامل داشته باشد
-- سوالات خود را در بخش **Discussions** مطرح کنید
-
----
-
-## ⭐ بیایید با هم یاد بگیریم!
-
-**هیچ کد آماده‌ای نیست - همه چیز را با هم می‌سازیم!**
-
-</div>
-
----
-
-## English Version
-
-### 🚀 Special Invitation
-
-**Let's build a professional trading bot for Bit24 together!**
-
-From zero to hero, step by step, with teamwork and collaboration.
-
----
-
-### 📋 What we'll do:
-
-- 💡 Brainstorming ideas
-- 🐛 Solving problems & issues
-- 👨‍💻 Programming (Fork & Pull Request)
-- 🔍 Debugging together
-- 📚 Documentation
-
----
-
-### 🎯 Rules to join:
-
-### [📜 Read the rules here](bot/rule.md)
-
----
-
-### 🤝 How to join?
-
-1. **Fork** this repository
-2. Read the **rules** in [`bot/rule.md`](bot/rule.md)
-3. Open an **Issue** with your idea or problem
-4. Wait for team coordination
-
----
-
-**⭐ No ready code - we build everything together!**
-
-
-
-##  ⚠️ نکته مهم
-
-**این کدها صرفاً برای راهنمایی و آموزش نوشته شده‌اند.**
-
-- تمام اطلاعات وارد شده (از جمله **API Key** و **Secret Key**) تنها در سیستم خود شما پردازش می‌شوند
-- هیچ اطلاعاتی به هیچ جای دیگری ارسال نمی‌شود
-- مسئولیت استفاده از این کدها و هرگونه ضرر احتمالی به عهده خود کاربر می‌باشد
-- توصیه می‌شود قبل از استفاده در معاملات واقعی، با مبالغ بسیار کم تست کنید
-
-```python
-# اطلاعات شما هرگز جایی ذخیره یا ارسال نمی‌شود
-API_KEY = input("Please Enter You API Key : ")      # ✅ فقط در RAM شما
-SECRET_KEY = input("Please Enter You Secret Key : ") # ✅ هرگز ذخیره نمی‌شود
+python/
+go/
+nodejs/
+bot/
+README.md
 ```
 
 ---
 
-## ⚠️ Important Note
+# Quick Start
 
-**This code is provided for educational and guidance purposes only.**
+## Python
 
-- All information entered (including **API Key** and **Secret Key**) is processed **only on your own system**
-- **No data is sent anywhere else** - not to me or any third party
-- The user is solely responsible for using this code and any potential losses
-- It is recommended to test with very small amounts before real trading
+Install requirements:
 
-```python
-# Your information is never stored or sent anywhere
-API_KEY = input("Please Enter You API Key : ")      # ✅ Only in your RAM
-SECRET_KEY = input("Please Enter You Secret Key : ") # ✅ Never stored
+```bash id="enpy1"
+pip install requests
+```
+
+Run:
+
+```bash id="enpy2"
+python 2buy.py
 ```
 
 ---
 
-**🔒 امنیت با شماست | Security is in your hands**
+## Go
 
-**🧑‍💻 ما فقط برنامه نویسیم | We Only Developer**
-</div>
+Run:
 
+```bash id="engo1"
+go run 2buy.go
+```
 
-> MIT License ;P
+Build executable:
+
+```bash id="engo2"
+go build
+```
+
+---
+
+## Node.js
+
+Run:
+
+```bash id="ennode1"
+node 2buy.js
+```
+
+Node.js 18+ recommended.
+
+---
+
+# Supported Examples
+
+| File     | Description          |
+| -------- | -------------------- |
+| `2buy`   | Limit Buy            |
+| `2sell`  | Market Sell          |
+| `asell`  | Sell Full Balance    |
+| `irtbuy` | Buy Using IRT Amount |
+
+---
+
+# Supported Trading Types
+
+| Type | Value |
+| ---- | ----- |
+| Buy  | `"1"` |
+| Sell | `"0"` |
+
+| Order Type | Value |
+| ---------- | ----- |
+| Market     | `"1"` |
+| Limit      | `"0"` |
+
+---
+
+# Security Notice
+
+* API Keys are processed only on your system
+* No data is sent anywhere else
+* Never share your Secret Key
+* Test with small amounts first
+
+---
+
+# Final Goal
+
+This project can become a base for:
+
+* Trading Bots
+* SDK Development
+* CLI Tools
+* Auto Traders
+* Signal Bots
+* Arbitrage Systems
+* Market Scanners
+
+MIT License
