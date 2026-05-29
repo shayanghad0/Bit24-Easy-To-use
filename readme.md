@@ -2,212 +2,617 @@
 
 <div dir="rtl">
 
+# ربات معامله‌گر Bit24 با Python و Go
+
 ### معرفی پروژه
 
-این یک ربات ساده و کاربردی برای انجام معاملات خودکار در صرافی **Bit24** می‌باشد. با استفاده از این کدها می‌توانید به راحتی سفارش‌های خرید و فروش ارزهای دیجیتال را به صورت **مارکت** یا **لیمیت** ثبت کنید.
+این پروژه مجموعه‌ای از ابزارهای ساده و کاربردی برای انجام معاملات خودکار در صرافی **Bit24** می‌باشد.
+
+نسخه‌های پروژه هم با **Python** و هم با **Go (Golang)** ارائه شده‌اند تا بتوانید بر اساس نیاز خود از هر زبان استفاده کنید.
+
+با استفاده از این کدها می‌توانید:
+
+* سفارش خرید و فروش ثبت کنید
+* سفارش مارکت یا لیمیت ارسال کنید
+* تمام موجودی یک ارز را بفروشید
+* خرید با مبلغ تومانی انجام دهید
+* ساختار API صرافی Bit24 را یاد بگیرید
 
 ---
 
-### قابلیت‌ها
+# قابلیت‌ها
 
-| قابلیت | توضیح |
-|--------|-------|
-| 🟢 خرید مارکت | خرید فوری با مبلغ تومانی مشخص |
-| 🔴 فروش مارکت | فروش فوری مقدار مشخصی از ارز |
-| 🟡 خرید لیمیت | خرید در قیمت دلخواه شما |
-| 🔵 فروش لیمیت | فروش در قیمت دلخواه شما |
-| 📦 فروش تمام موجودی | فروش کل یک ارز خاص |
-
----
-
-### فایل‌های پروژه
-
-| فایل | کاربرد |
-|------|--------|
-| `2buy.py` | خرید 2 واحد از یک ارز (لیمیت) |
-| `2sell.py` | فروش 2 واحد از یک ارز (مارکت) |
-| `asell.py` | فروش تمام موجودی یک ارز (مارکت) |
-| `irtbuy.py` | خرید ارز با مبلغ تومانی مشخص (مارکت) |
-| `API.md` | مستندات کامل API صرافی Bit24 |
+| قابلیت              | توضیح                         |
+| ------------------- | ----------------------------- |
+| 🟢 خرید مارکت       | خرید فوری با مبلغ تومانی مشخص |
+| 🔴 فروش مارکت       | فروش فوری مقدار مشخصی از ارز  |
+| 🟡 خرید لیمیت       | خرید در قیمت دلخواه           |
+| 🔵 فروش لیمیت       | فروش در قیمت دلخواه           |
+| 📦 فروش تمام موجودی | فروش کل موجودی یک ارز         |
+| ⚡ نسخه Go           | اجرای سریع‌تر و حرفه‌ای‌تر    |
+| 🐍 نسخه Python      | ساده و مناسب یادگیری          |
 
 ---
 
-### پیش‌نیازها
+# ساختار پروژه
 
-قبل از اجرای کدها، باید کتابخانه زیر را نصب کنید:
+```text
+Bit24-Trading-Bot/
+│
+├── python/
+│   ├── 2buy.py
+│   ├── 2sell.py
+│   ├── asell.py
+│   ├── irtbuy.py
+│   └── API.md
+│
+├── go/
+│   ├── 2buy.go
+│   ├── 2sell.go
+│   ├── asell.go
+│   ├── irtbuy.go
+│   └── API.md
+│
+├── bot/
+│   └── rule.md
+│   └── Readme.md
+│
+└── README.md
+```
+
+---
+
+# فایل‌های Python
+
+| فایل        | کاربرد                        |
+| ----------- | ----------------------------- |
+| `2buy.py`   | خرید 2 واحد ارز (Limit Buy)   |
+| `2sell.py`  | فروش 2 واحد ارز (Market Sell) |
+| `asell.py`  | فروش تمام موجودی ارز          |
+| `irtbuy.py` | خرید با مبلغ تومانی           |
+| `API.md`    | مستندات کامل Python API       |
+
+---
+
+# فایل‌های Go
+
+| فایل                  | کاربرد                 |
+| --------------------- | ---------------------- |
+| `2buy.go`             | خرید لیمیت با Go       |
+| `2sell.go`            | فروش مارکت با Go       |
+| `sell_all_balance.go` | فروش کل موجودی با Go   |
+| `irtbuy.go`           | خرید با مبلغ IRT با Go |
+| `API_GO.md`           | مستندات کامل API در Go |
+
+---
+
+# چرا Go؟
+
+نسخه Go برای افرادی مناسب است که می‌خواهند:
+
+* سرعت بالاتر داشته باشند
+* مصرف RAM کمتر باشد
+* فایل EXE مستقل بسازند
+* ربات حرفه‌ای‌تر توسعه دهند
+* Multi-thread / Goroutine استفاده کنند
+* Trading Bot واقعی توسعه دهند
+
+---
+
+# پیش‌نیازهای Python
+
+نصب کتابخانه requests:
 
 ```bash
 pip install requests
 ```
 
----
-
-## نحوه دریافت API Key
-
-1. وارد حساب کاربری خود در [صرافی Bit24](https://bit24.cash) شوید.
-2. به بخش [**مدیریت API**](https://bit24.cash/dashboard/api-management) بروید.
-3. یک کلید جدید بسازید و دسترسی مورد نیاز را فعال کنید.
-4. **API Key** و **Secret Key** را کپی کنید.
-
----
-
-## نحوه استفاده
-
-### 1. خرید 2 واحد ارز (لیمیت)
+اجرای فایل‌ها:
 
 ```bash
 python 2buy.py
 ```
 
-این کد:
-- بهترین قیمت فروش (Ask) را دریافت می‌کند
-- سفارش خرید لیمیت را با همان قیمت ثبت می‌کند
+---
 
-### 2. فروش 2 واحد ارز (مارکت)
+# پیش‌نیازهای Go
+
+## نصب Go
+
+دانلود از سایت رسمی:
+
+```text
+https://go.dev/dl/
+```
+
+بررسی نصب:
+
+```bash
+go version
+```
+
+---
+
+# اجرای فایل‌های Go
+
+## اجرای مستقیم
+
+```bash
+go run 2buy.go
+```
+
+---
+
+## ساخت فایل EXE
+
+```bash
+go build
+```
+
+یا:
+
+```bash
+go build 2buy.go
+```
+
+خروجی:
+
+```text
+2buy.exe
+```
+
+اجرا:
+
+```bash
+./2buy.exe
+```
+
+در PowerShell:
+
+```powershell
+.\2buy.exe
+```
+
+---
+
+# ساخت Go Module
+
+پیشنهاد می‌شود:
+
+```bash
+go mod init bit24-bot
+```
+
+سپس:
+
+```bash
+go mod tidy
+```
+
+---
+
+# نحوه دریافت API Key
+
+1. وارد حساب کاربری خود در Bit24 شوید
+2. وارد بخش مدیریت API شوید
+3. یک API جدید بسازید
+4. دسترسی‌های مورد نیاز را فعال کنید
+5. API Key و Secret Key را کپی کنید
+
+---
+
+# نمونه دریافت اطلاعات کاربر
+
+## Python
+
+```python
+API_KEY = input("Please Enter Your API Key : ")
+SECRET_KEY = input("Please Enter Your Secret Key : ")
+```
+
+---
+
+## Go
+
+```go
+reader := bufio.NewReader(os.Stdin)
+
+fmt.Print("Please Enter Your API Key: ")
+apiKey, _ := reader.ReadString('\n')
+
+fmt.Print("Please Enter Your Secret Key: ")
+secretKey, _ := reader.ReadString('\n')
+```
+
+---
+
+# نحوه استفاده
+
+# 1. خرید 2 واحد ارز (Limit Buy)
+
+## Python
+
+```bash
+python 2buy.py
+```
+
+## Go
+
+```bash
+go run 2buy.go
+```
+
+این فایل:
+
+* بهترین قیمت فروش را دریافت می‌کند
+* سفارش Limit Buy ثبت می‌کند
+
+---
+
+# 2. فروش 2 واحد ارز (Market Sell)
+
+## Python
 
 ```bash
 python 2sell.py
 ```
 
-این کد بلافاصله 2 واحد ارز مورد نظر را با قیمت بازار می‌فروشد.
+## Go
 
-### 3. فروش تمام موجودی یک ارز
+```bash
+go run 2sell.go
+```
+
+---
+
+# 3. فروش تمام موجودی
+
+## Python
 
 ```bash
 python asell.py
 ```
 
-این کد:
-- موجودی قابل فروش ارز ADA را بررسی می‌کند
-- تمام موجودی را به صورت مارکت می‌فروشد
+## Go
 
-### 4. خرید با مبلغ تومانی مشخص (مارکت)
+```bash
+go run sell_all_balance.go
+```
+
+این فایل:
+
+* موجودی ارز را دریافت می‌کند
+* کل موجودی را می‌فروشد
+
+---
+
+# 4. خرید با مبلغ تومانی
+
+## Python
 
 ```bash
 python irtbuy.py
 ```
 
-این کد با مبلغ 200,000 تومان ارز ADA را به صورت مارکت خریداری می‌کند.
+## Go
 
----
-
-## تغییر ارز و مقدار
-
-برای تغییر ارز یا مقدار، کافیست فایل مربوطه را باز کنید و مقادیر زیر را تغییر دهید:
-
-```python
-params = {
-    "base_coin_symbol": "ADA",    # ← اسم ارز را اینجا عوض کنید
-    "quote_coin_symbol": "IRT",   # ← ارز پایه (IRT یا USDT)
-    "amount": "2",                # ← مقدار را اینجا عوض کنید
-}
+```bash
+go run irtbuy.go
 ```
 
-**ارزهای قابل پشتیبانی:** `BTC`, `ETH`, `ADA`, `SOL`, `DOGE`, `XRP` و ...
-
 ---
 
-## تفاوت سفارشات
+# تغییر ارز و مقدار
 
-| نوع سفارش | کد `category_type` | توضیح |
-|-----------|-------------------|-------|
-| **مارکت (Market)** | `"1"` | سفارش فوراً با قیمت بازار اجرا می‌شود |
-| **لیمیت (Limit)** | `"0"` | سفارش فقط در قیمت تعیین شده اجرا می‌شود |
-
-| نوع معامله | کد `type` |
-|------------|-----------|
-| خرید (Buy) | `"1"` |
-| فروش (Sell) | `"0"` |
-
----
-
-## مثال‌های عملی
-
-### فروش 5 عدد ADA به صورت لیمیت در قیمت 100,000 تومان
+## Python
 
 ```python
 params = {
     "base_coin_symbol": "ADA",
     "quote_coin_symbol": "IRT",
-    "type": "0",           # فروش
-    "category_type": "0",  # لیمیت
+    "amount": "2",
+}
+```
+
+---
+
+## Go
+
+```go
+params := map[string]string{
+	"base_coin_symbol":  "ADA",
+	"quote_coin_symbol": "IRT",
+	"amount":            "2",
+}
+```
+
+---
+
+# ارزهای پشتیبانی‌شده
+
+```text
+BTC
+ETH
+ADA
+SOL
+DOGE
+XRP
+BNB
+TRX
+AVAX
+DOT
+LTC
+```
+
+و سایر ارزهای پشتیبانی‌شده در Bit24.
+
+---
+
+# تفاوت سفارشات
+
+| نوع سفارش | category_type |
+| --------- | ------------- |
+| Market    | `"1"`         |
+| Limit     | `"0"`         |
+
+---
+
+| نوع معامله | type  |
+| ---------- | ----- |
+| Buy        | `"1"` |
+| Sell       | `"0"` |
+
+---
+
+# مثال‌های عملی
+
+# فروش لیمیت ADA
+
+## Python
+
+```python
+params = {
+    "base_coin_symbol": "ADA",
+    "quote_coin_symbol": "IRT",
+    "type": "0",
+    "category_type": "0",
     "price": "100000",
     "amount": "5"
 }
 ```
 
-### خرید اتریوم با 1 میلیون تومان به صورت مارکت
+---
+
+## Go
+
+```go
+params := map[string]string{
+	"base_coin_symbol":  "ADA",
+	"quote_coin_symbol": "IRT",
+	"type":              "0",
+	"category_type":     "0",
+	"price":             "100000",
+	"amount":            "5",
+}
+```
+
+---
+
+# خرید اتریوم با 1 میلیون تومان
+
+## Python
 
 ```python
 params = {
     "base_coin_symbol": "ETH",
     "quote_coin_symbol": "IRT",
-    "type": "1",           # خرید
-    "category_type": "1",  # مارکت
+    "type": "1",
+    "category_type": "1",
     "quote_coin_amount": "1000000"
 }
 ```
 
 ---
 
-## نکات مهم
+## Go
 
-⚠️ **حتماً به این نکات توجه کنید:**
-
-1. **موجودی حساب خود را بررسی کنید** قبل از ثبت سفارش
-2. در خرید **مارکت** از `quote_coin_amount` استفاده کنید
-3. در فروش **مارکت** از `amount` استفاده کنید
-4. **Secret Key** خود را به هیچکس ندهید
-5. برای معاملات واقعی، ابتدا با مبالغ کم تست کنید
+```go
+params := map[string]string{
+	"base_coin_symbol":  "ETH",
+	"quote_coin_symbol": "IRT",
+	"type":              "1",
+	"category_type":     "1",
+	"quote_coin_amount": "1000000",
+}
+```
 
 ---
 
-## ساختار امضای درخواست‌ها
+# ساخت Signature
 
-تمامی درخواست‌ها باید با الگوریتم **HMAC-SHA256** امضا شوند:
+تمام درخواست‌ها باید با HMAC-SHA256 امضا شوند.
+
+---
+
+## Python
 
 ```python
 query = urlencode(sorted(params.items()))
-signature = hmac.new(SECRET_KEY.encode(), query.encode(), hashlib.sha256).hexdigest()
+
+signature = hmac.new(
+    SECRET_KEY.encode(),
+    query.encode(),
+    hashlib.sha256
+).hexdigest()
+
 params["signature"] = signature
 ```
 
 ---
 
-## لینک‌های مفید
+## Go
 
-- [وب‌سایت صرافی Bit24](https://bit24.cash)
-- [مستندات کامل API](https://docs.bit24.cash/#api-24)
-- [موارد مهم مستندات برای خرید/فروش](api.md)
+```go
+func signParams(params map[string]string) string {
+	var keys []string
+
+	for k := range params {
+		if k != "signature" {
+			keys = append(keys, k)
+		}
+	}
+
+	sort.Strings(keys)
+
+	var parts []string
+
+	for _, k := range keys {
+		parts = append(parts, fmt.Sprintf("%s=%s", k, params[k]))
+	}
+
+	queryString := strings.Join(parts, "&")
+
+	h := hmac.New(sha256.New, []byte(SECRET_KEY))
+	h.Write([]byte(queryString))
+
+	return hex.EncodeToString(h.Sum(nil))
+}
+```
 
 ---
 
-## مجوز
+# نکات مهم
 
-این پروژه تحت مجوز **MIT** منتشر شده است.
+⚠️ قبل از استفاده حتماً مطالعه کنید:
+
+1. ابتدا با مبالغ کم تست کنید
+2. Secret Key را با کسی به اشتراک نگذارید
+3. موجودی حساب را بررسی کنید
+4. برای Buy Market از `quote_coin_amount` استفاده کنید
+5. برای Sell Market از `amount` استفاده کنید
+6. در Go حتماً Timeout تنظیم کنید
+
+---
+
+# Timeout در Go
+
+پیشنهاد حرفه‌ای:
+
+```go
+client := &http.Client{
+	Timeout: 15 * time.Second,
+}
+```
+
+---
+
+# مزایای Go نسبت به Python
+
+| قابلیت            | Python              | Go         |
+| ----------------- | ------------------- | ---------- |
+| سرعت اجرا         | متوسط               | بسیار بالا |
+| ساخت EXE          | نیازمند ابزار اضافه | داخلی      |
+| مصرف RAM          | بیشتر               | کمتر       |
+| Concurrency       | محدودتر             | عالی       |
+| مناسب Trading Bot | خوب                 | عالی       |
+
+---
+
+# مشارکت در پروژه
+
+## چه کار خواهیم کرد؟
+
+| بخش            | توضیح                 |
+| -------------- | --------------------- |
+| 💡 ایده‌پردازی | توسعه قابلیت‌های جدید |
+| 🐛 رفع باگ     | Debug و Fix           |
+| 👨‍💻 توسعه    | Pull Request          |
+| 📚 مستندسازی   | بهبود Docs            |
+| ⚡ نسخه Go      | توسعه SDK حرفه‌ای     |
+
+---
+
+# نحوه مشارکت
+
+1. Fork کنید
+2. Rule ها را بخوانید
+3. Issue ثبت کنید
+4. Pull Request ارسال کنید
+
+---
+
+# English Summary
+
+Bit24 Trading Bot supports both Python and Go implementations for automated trading on Bit24 exchange.
+
+Supported features:
+
+* Market Buy
+* Market Sell
+* Limit Buy
+* Limit Sell
+* Sell Full Balance
+* HMAC-SHA256 Signing
+* Go & Python examples
+
+---
+
+# Quick Start
+
+## Python
+
+```bash
+pip install requests
+python 2buy.py
+```
+
+---
+
+## Go
+
+```bash
+go run 2buy.go
+```
+
+Build executable:
+
+```bash
+go build
+```
+
+---
+
+# Security Notice
+
+* API keys are processed only on your system
+* No information is sent anywhere else
+* Never share your Secret Key
+* Use small amounts for testing
+
+---
+
+# License
+
+MIT License
+
+---
+
+# Final Note
+
+⚡ این پروژه می‌تواند پایه‌ای برای ساخت:
+
+* Trading Bot حرفه‌ای
+* CLI Tool
+* Go SDK
+* Market Scanner
+* Auto Trader
+* Signal Bot
+* Arbitrage System
+
+باشد.
 
 </div>
 
----
-
-## English Summary
-
-**Bit24 Trading Bot** is a simple Python tool for automated trading on the Bit24 exchange. It supports market and limit orders for buying and selling cryptocurrencies with IRT.
-
-### Files:
-- `2buy.py` - Buy 2 units (limit order)
-- `2sell.py` - Sell 2 units (market order)  
-- `asell.py` - Sell entire balance (market order)
-- `irtbuy.py` - Buy with specific IRR amount (market order)
-- `API.md` - Complete API documentation
-
-### Quick Start:
-```bash
-pip install requests
-python 2buy.py  # then enter your API credentials
-```
-
-<div dir="rtl">
 
 <div dir="rtl">
 
